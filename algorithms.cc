@@ -2,9 +2,10 @@
 This code is from the https://www.youtube.com/watch?v=eJCA2fynzME&t=1443s
 Back to Basics: (Range) Algorithms in C++ - Klaus Iglberger - CppCon 2023
 */
-#include <stdio.h>
+#include "stdio.h"
 #include <vector>
 #include <algorithm>
+#include <numeric>
 
 //partition
 int partition()
@@ -26,17 +27,12 @@ int accumulate()
 {
     std::vector<Person> table = /*...*/;
     
-    // Prefer to keep things immutable.
-    // Anti pattern : Initialize then modify
+    //even drop the initial value here
+    auto const sum =
+        std::reduce(std::execution::par,
+            std::begin(table), std::end(table), double{} );
 
-    auto const age =
-        std::accumulate( std::begin(table), std::end(table), 0,
-        [](int age, Person const& p )
-        {
-            return age + p.age;
-        } );
-
-    std::cout << "Total age = " << age << '\n';
+    std::cout << "Total age = " << sum << '\n';
 
     // ...
 }
