@@ -20,3 +20,16 @@ int partition()
 
     std::ranges::rotate(table, pos);
 }
+
+int accumulate()
+{
+    std::vector<Person> table = /*...*/;
+
+    int total_age = 0;
+    for( auto const& person : table) {
+        total_age += person.age;
+    }
+    std::cout << "Total age =" << total_age << '\n';
+
+    // ...
+}
