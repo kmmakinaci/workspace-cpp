@@ -40,8 +40,18 @@ public:
     int houseNo;
     string colony, city, state;
     
-    Address(int hno, const string& colony, const string& city, const string& state)
-        : houseNo(hno), colony(colony), city(city), state(state) {}
+    Address(int hno, const string& colony, const string& city, const string& state){
+            if (hno <= 0) {
+                throw invalid_argument("House number must be greater than 0");
+            }
+            if (colony.empty() || city.empty() || state.empty()) {
+                throw invalid_argument("Address fields cannot be empty");
+            }
+            houseNo = hno;
+            this->colony = colony;
+            this->city = city;
+            this->state = state;
+        }
 
     int getHouseNo() const { return houseNo; }
     string getColony() const { return colony; }
@@ -54,33 +64,41 @@ private:
     string name;
     shared_ptr<Address> address;
 public:
-    Person(const string& name, shared_ptr<Address> address)
+    Person(const string& name, shared_ptr<Address> address = nullptr)
         : name(name), address(address) {}
 
     string getName() const { return name; }
     shared_ptr<Address> getAddress() const { return address; }
 
-    void setAddress(shared_ptr<Address> newAddress) {
+    void setAddress(shared_ptr<Address>& newAddress) {
         address = newAddress;
     }
 
     void display() const {
-        cout << name << " " << address->houseNo << " " << address->colony << " " << address->city << " " << address->state << endl;
+        if (address){
+            cout << name << " " 
+                << address->getHouseNo << " "
+                << address->getColony << " "
+                << address->getCity << " "
+                << address->getState << endl;
+        } else{
+            cout << name << " has no address" << endl;
+        }
     }
 };
 
 int main() {
-    auto add1 = make_shared<Address>(868, "Mahavir Colony", "Jahagirpuri", "New Delhi");
-    auto add2 = make_shared<Address>(123, "Green Park", "South Delhi", "New Delhi");
+    auto homeAddress1 = make_shared<Address>(868, "Mahavir Colony", "Jahagirpuri", "New Delhi");
+    auto homeAddress2 = make_shared<Address>(123, "Green Park", "South Delhi", "New Delhi");
 
-    Person p1("Raj", add1);
-    Person p2("Seema", add1);
+    Person p1("Raj", homeAddress1);
+    Person p2("Seema", homeAddress1);
 
     p1.display();
     p2.display();
 
     // Update address for p1
-    p1.setAddress(add2);
+    p1.setAddress(homeAddress2);
     p1.display();
     
     return 0;
