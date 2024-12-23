@@ -76,13 +76,13 @@ public:
 
     void display() const {
         if (address){
-            cout << name << " " 
-                << address->getHouseNo << " "
-                << address->getColony << " "
-                << address->getCity << " "
-                << address->getState << endl;
+            cout << getName() << " " 
+                << address->getHouseNo() << " "
+                << address->getColony() << " "
+                << address->getCity() << " "
+                << address->getState() << endl;
         } else{
-            cout << name << " has no address" << endl;
+            cout << getName() << " has no address" << endl;
         }
     }
 };
