@@ -9,3 +9,5 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Add subdirectories for modularity
 add_subdirectory(basics)
+add_subdirectory(cpp_template_workspace)
+add_subdirectory(featured)

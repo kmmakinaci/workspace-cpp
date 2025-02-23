@@ -2,5 +2,5 @@
 	path = cpp_template_workspace
 	url = https://github.com/kmmakinaci/cpp_template_workspace.git
 [submodule "ethernet"]
-	path = ethernet
+	path = /featured/ethernet
 	url = https://github.com/kmmakinaci/ethernet.git
